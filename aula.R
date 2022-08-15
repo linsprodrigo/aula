@@ -4,7 +4,6 @@
 
 ## Criando objeto simples ##
 vetor <- c(1,2,3,5,7)
-
 str(vetor)
 
 ## Criando objeto complexo ##
