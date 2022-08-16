@@ -2,6 +2,8 @@
 ## Professor: Hugo Medeiros ##
 ## Aluno: Rodrigo Lins ##
 
+library('pacman')
+
 ## Criando objeto simples ##
 vetor <- c(1,2,3,5,7)
 str(vetor)
