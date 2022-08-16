@@ -9,5 +9,5 @@ str(vetor)
 ## Criando objeto complexo ##
 reg1 <- lm(mpg~ ., mtcars)
 reg1
-
 str(reg1)
+
