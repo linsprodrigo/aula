@@ -4,6 +4,7 @@
 
 library('pacman')
 library("eeptools")
+library("caret")
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -63,3 +64,21 @@ indexSimulacao <- seq(1, length(distNormal))
 
 ## Remover tarefa setseed
 removeTaskCallback(tarefaSemente)
+
+## Amostragem e bootstrapping
+
+## Bootstrapping
+set.seed(2022)
+
+## Replicar a amostra 10x
+bootsDistNormal10 <- replicate(10, sample(distNormal, 10, replace = TRUE))
+bootsDistNormal10
+
+mediaBootsNormal10 <- replicate(10, mean(sample(distNormal, 10, replace = TRUE))) ## 10 amostras de 10 casos
+mediaBootsNormal50 <- replicate(50, mean(sample(distNormal, 10, replace = TRUE))) ## 50 amostras de 10 casos
+mediaBootsNormal100 <- replicate(100, mean(sample(distNormal, 10, replace = TRUE))) ## 100 amostras de 10 casos
+
+mean(mediaBootsNormal10)
+mean(mediaBootsNormal50)
+mean(mediaBootsNormal100)
+mean(distNormal)
