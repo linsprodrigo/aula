@@ -82,3 +82,40 @@ mean(mediaBootsNormal10)
 mean(mediaBootsNormal50)
 mean(mediaBootsNormal100)
 mean(distNormal)
+
+## Calculando
+
+binominalnegSimulacao <- rnbinom(300, mu = 3, size = 10)
+poissonSimulacao <- rpois(300,3)
+
+hist(binominalnegSimulacao)
+hist(poissonSimulacao)
+
+binominalnegSimulacao + poissonSimulacao
+
+poissonSimulacao + 100
+poissonSimulacaoˆ2
+poissonSimulacao*binominalnegSimulacao
+
+round(distNormal, 0)
+ceiling(distNormal)
+floor(distNormal)
+
+distNormal %% poissonSimulacao
+
+mean(poissonSimulacao)
+median(poissonSimulacao)
+sd(poissonSimulacao)
+var(poissonSimulacao)
+
+poissonSimulacaoCentral <- poissonSimulacao - mean(poissonSimulacao)
+hist(poissonSimulacaoCentral)
+hist(binominalnegSimulacao)
+
+## Normalizando variável de banco criado por mim
+dataframe <- read_csv("dataframe.csv")
+
+testeNormal <- dataframe$v2x_polyarchy - mean(dataframe$v2x_polyarchy)
+hist(dataframe$v2x_polyarchy)
+hist(testeNormal)
+
