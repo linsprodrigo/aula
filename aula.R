@@ -210,3 +210,39 @@ lapply(iris[, 1:4], hist)
 listaPaises$Brasil <- ifelse(listaPaises$nome == 'Brasil', 1, 0)
 
 lapply(listaPaises[,3:4], hist)
+
+## Funcoes
+
+f <- function() {
+  cat("Hello, world!\n")
+}
+f()
+
+# função com estrutura de repetição
+f <- function(nro) {
+  for(i in 1:nro) {
+    cat("Hello, world!\n")
+  }
+}
+f(3)
+
+# função com estrutura condicional e de repetição
+f <- function(nro) {
+  if(nro < 100) {
+    for(i in 1:nro) {
+      cat("Hello, world!\n")
+    }
+  } else {
+    cat("Tá demais")
+  }
+}
+f(99)
+f(100)
+
+centralizacao <- function(x) {
+  x <- x - mean(x)
+  return(x)
+}
+
+centralizacao(irisCopia$Sepal.Length)
+centroTeste <- centralizacao(irisCopia$Sepal.Length)
