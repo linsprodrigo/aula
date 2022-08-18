@@ -178,3 +178,35 @@ listaPaises[3,3] != listaPaises[5, 3]
 
 'Brazil' %in% dataframe$country
 match(dataframe$country, 'Brazil')
+
+## Estruturas de controle
+
+x <- runif(1, 0, 5)
+x
+
+if(x > 3) {
+  y <- 5
+} else{
+  y <- 0
+}
+y
+
+irisCopia$SpeciesDummy <- ifelse(irisCopia$Species == 'setosa', 1, 0)
+
+par(mfrow = c(2,2))
+
+for (i in 1:4) {
+  x <- iris [ , i]
+  hist(x,
+       main = paste("variável", i, names(iris)[i]),
+       xlab = "Valores da variável",
+       xlim = c(0, 10))
+}
+
+lapply(iris[, 1:4], hist)
+
+##Controle condicional ou controle de repetição
+
+listaPaises$Brasil <- ifelse(listaPaises$nome == 'Brasil', 1, 0)
+
+lapply(listaPaises[,3:4], hist)
