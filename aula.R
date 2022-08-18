@@ -119,3 +119,62 @@ testeNormal <- dataframe$v2x_polyarchy - mean(dataframe$v2x_polyarchy)
 hist(dataframe$v2x_polyarchy)
 hist(testeNormal)
 
+## Index e Operadores Lógicos
+
+##Index
+poissonSimulacao[1]
+poissonSimulacao[c(1:10, 15)]
+
+matrix1[1, ] #linha
+matrix[ 0,1] #colina
+matrix[1,1] #linha e coluna
+
+iris$Species
+iris[ ,5]
+iris[1:10, 2:5]
+iris[ ,'Species']
+iris[ ,'Species', drop = FALSE]
+iris[ , -5] # retorna todas as colunas, exceto a 5
+
+reg1$coefficients
+reg1$coefficients[1]
+reg1[['coefficients']][1]
+reg1[[1]][1]
+
+##Operadores lógicos
+a <- 5
+b <- 7
+c <- 5
+
+a < b
+a <= b
+a > b
+a >= b
+a == b
+a != b
+a %in% c(b, c)
+a == c & a < b
+a != c | a > b
+xor(a != c, a < b)
+!a != c
+any(a != c, a < c, a == c)
+all(a != c, a < c, a == c)
+
+##Operadores lógicos na prática
+iris$Sepal.Length <= 0
+iris$Sepal.Length >= 0 & iris$Sepal.Width <= 0.2
+
+which(iris$Sepal.Length <= 5)
+match(iris$Species, 'setosa')
+
+##Usando indexacao
+listaPaises[1, ]
+listaPaises[ ,1]
+listaPaises[1, 1]
+
+listaPaises[3,3] < listaPaises[9, 3]
+listaPaises[3,3] == listaPaises[9, 3]
+listaPaises[3,3] != listaPaises[5, 3]
+
+'Brazil' %in% dataframe$country
+match(dataframe$country, 'Brazil')
