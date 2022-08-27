@@ -71,6 +71,9 @@ removeTaskCallback(tarefaSemente)
 set.seed(2022)
 
 ## Replicar a amostra 10x
+
+## EXEMPLO DO PROFESSOR ##
+
 bootsDistNormal10 <- replicate(10, sample(distNormal, 10, replace = TRUE))
 bootsDistNormal10
 
@@ -82,6 +85,20 @@ mean(mediaBootsNormal10)
 mean(mediaBootsNormal50)
 mean(mediaBootsNormal100)
 mean(distNormal)
+
+## FEITO POR MIM, A PARTE DA BASE IRIS ##
+
+irisBoots <- replicate(10, sample(iris$Sepal.Length, 10, replace = TRUE))
+irisBoots
+
+mediaIris10 <- replicate(10, mean(sample(iris$Sepal.Length, 10, replace = TRUE))) ## 10 amostras de 10 casos
+mediaIris50 <- replicate(50, mean(sample(iris$Sepal.Length, 10, replace = TRUE))) ## 50 amostras de 10 casos
+mediaIris1100 <- replicate(100, mean(sample(iris$Sepal.Length, 10, replace = TRUE))) ## 100 amostras de 10 casos
+
+mean(mediaIris10)
+mean(mediaIris50)
+mean(mediaIris1100)
+mean(iris$Sepal.Length)
 
 ## Calculando
 
@@ -279,3 +296,7 @@ for (i in 3) {
        ylab = 'Frequência',
        xlim = c(min(listaPaises[, i]), max(listaPaises[, i])))
 }
+
+## T2 - SISTEMAS COMPLEXOS ####
+
+## T3 - EXTRACAO, TRANSFORMACAO E LEITURA - ETL ####
