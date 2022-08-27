@@ -131,6 +131,7 @@ hist(binominalnegSimulacao)
 
 ## Normalizando variável de banco criado por mim
 dataframe <- read_csv("dataframe.csv")
+dataframe <- subset(dataframe, select = -X1)
 
 testeNormal <- dataframe$v2x_polyarchy - mean(dataframe$v2x_polyarchy)
 hist(dataframe$v2x_polyarchy)
