@@ -8,6 +8,10 @@ library('pacman')
 library("eeptools")
 library("caret")
 library("dplyr")
+library("readxl")
+library("rjson")
+library("XML")
+
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -353,3 +357,17 @@ for (itm in ls()) {
 
 rm(list = ls()[!ls() %in% c("sinistrosRecifetotal", "naZero")])
 
+## Principais fontes para extracao ##
+
+## Exemplo de extracao .csv (Relacao das pessoas vacinadas - Covid-19)
+vacinados_covid <- read.csv2('http://dados.recife.pe.gov.br/dataset/f381d9ea-4839-44a6-b4fe-788239189900/resource/966e9c4c-df45-40d7-9c58-2f13c61a6d28/download/vacinados.csv',
+                                                       sep = ';', encoding = 'UTF-8') ## Vacinados Covid-19 ##
+
+## Exemplo de extracao JSON (Malha cicloviaria do Recife - metadados das rotas operacionais)
+
+malha_cicloviaria <- fromJSON(file = "http://dados.recife.pe.gov.br/dataset/667cb4cf-fc93-4687-bb8f-431550eeb2db/resource/f0fdaad1-080e-40d0-a712-c152509d6f99/download/metadados-malhaoperacionalrecife.json")
+malha_cicloviaria <- as.data.frame(malha_cicloviaria)
+
+## Exemplo de extracao de XML (WSU cursos)
+
+WSU_xml <- xmlToDataFrame("http://aiweb.cs.washington.edu/research/projects/xmltk/xmldata/data/courses/wsu.xml")
