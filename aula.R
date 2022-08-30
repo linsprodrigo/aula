@@ -334,3 +334,15 @@ sinistrosRecifetotal$DATA <- as.Date(sinistrosRecifetotal$DATA, format = "%Y-%m-
 ## Alterando variavel categorica para fator ##
 sinistrosRecifetotal$tipo <- as.factor(sinistrosRecifetotal$tipo) ## Tipo do sinistro ##
 sinistrosRecifetotal$situacao <- as.factor(sinistrosRecifetotal$situacao) ## Situacao da chamada ##
+
+# Funçao para substituir NA por 0
+naZero <- function(x) {
+  x <- ifelse(is.na(x), 0, x)
+}
+
+## Extracao ##
+
+ls()
+
+rm(list = ls()[!ls() %in% c("sinistrosRecifetotal", "naZero")])
+
