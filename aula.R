@@ -2,9 +2,12 @@
 ## Professor: Hugo Medeiros ##
 ## Aluno: Rodrigo Lins ##
 
+## Pacotes e opções ####
+
 library('pacman')
 library("eeptools")
 library("caret")
+library("dplyr")
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -300,4 +303,34 @@ for (i in 3) {
 
 ## T2 - SISTEMAS COMPLEXOS ####
 
+##
 ## T3 - EXTRACAO, TRANSFORMACAO E LEITURA - ETL ####
+
+## ETL na prática ##
+
+## Importando dados de sinistros da PCR ##
+sinistrosRecife2018Raw <- read.csv2('http://dados.recife.pe.gov.br/dataset/44087d2d-73b5-4ab3-9bd8-78da7436eed1/resource/2485590a-3b35-4ad0-b955-8dfc36b61021/download/acidentes_2018.csv',
+                                   sep = ';', encoding = 'UTF-8') ## 2018 ##
+
+sinistrosRecife2019Raw <- read.csv2('http://dados.recife.pe.gov.br/dataset/44087d2d-73b5-4ab3-9bd8-78da7436eed1/resource/3531bafe-d47d-415e-b154-a881081ac76c/download/acidentes-2019.csv',
+                                   sep = ';', encoding = 'UTF-8') ## 2019 ##
+
+sinistrosRecife2020Raw <- read.csv2('http://dados.recife.pe.gov.br/dataset/44087d2d-73b5-4ab3-9bd8-78da7436eed1/resource/fc1c8460-0406-4fff-b51a-e79205d1f1ab/download/acidentes_2020-novo.csv',
+                                    sep = ';', encoding = 'UTF-8') ## 2020 ##
+
+sinistrosRecife2021Raw <- read.csv2('http://dados.recife.pe.gov.br/dataset/44087d2d-73b5-4ab3-9bd8-78da7436eed1/resource/2caa8f41-ccd9-4ea5-906d-f66017d6e107/download/acidentes2021.csv',
+                                    sep = ';', encoding = 'UTF-8') ## 2021 (ate julho) ##
+
+## Concatenando ##
+
+## Transformando nome da coluna 'data' para 'DATA' que possam ser mergidas sem a criacao de uma nova coluna ##
+colnames(sinistrosRecife2020Raw)[which(names(sinistrosRecife2020Raw) == "data")] <- "DATA"
+
+sinistrosRecifetotal <- bind_rows(sinistrosRecife2018Raw, sinistrosRecife2019Raw, sinistrosRecife2020Raw)
+
+## Ajustando o formato de data ##
+sinistrosRecifetotal$DATA <- as.Date(sinistrosRecifetotal$DATA, format = "%Y-%m-%d")
+
+## Alterando variavel categorica para fator ##
+sinistrosRecifetotal$tipo <- as.factor(sinistrosRecifetotal$tipo) ## Tipo do sinistro ##
+sinistrosRecifetotal$situacao <- as.factor(sinistrosRecifetotal$situacao) ## Situacao da chamada ##
