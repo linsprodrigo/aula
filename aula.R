@@ -344,5 +344,12 @@ naZero <- function(x) {
 
 ls()
 
+for (itm in ls()) { 
+  print(formatC(c(itm, object.size(get(itm))), 
+                format="d", 
+                width=30), 
+        quote=F)
+}
+
 rm(list = ls()[!ls() %in% c("sinistrosRecifetotal", "naZero")])
 
