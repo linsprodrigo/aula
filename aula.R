@@ -11,6 +11,7 @@ library("dplyr")
 library("readxl")
 library("rjson")
 library("XML")
+library("microbenchmark")
 
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
@@ -371,3 +372,23 @@ malha_cicloviaria <- as.data.frame(malha_cicloviaria)
 ## Exemplo de extracao de XML (WSU cursos)
 
 WSU_xml <- xmlToDataFrame("http://aiweb.cs.washington.edu/research/projects/xmltk/xmldata/data/courses/wsu.xml")
+
+
+## Leitura ##
+
+## Exportando o banco de dados nas versoes RDS e CSV 
+saveRDS(sinistrosRecifetotal, "bases_tratadas/sinistrosRecife.rds")
+write.csv2(sinistrosRecifetotal, "bases_tratadas/sinistrosRecife.csv")
+
+## Carregando as bases de dados
+sinistrosRecife <- readRDS('bases_tratadas/sinistrosRecife.rds')
+sinistrosRecife <- read.csv2('bases_tratadas/sinistrosRecife.csv', sep = ';')
+
+## Comparando processos
+microbenchmark(a <- saveRDS(sinistrosRecifetotal, "bases_tratadas/sinistrosRecife.rds"),
+               b <- write.csv2(sinistrosRecifetotal, "bases_tratadas/sinistrosRecife.csv"),
+               times = 10L)
+
+microbenchmark(a <- readRDS('bases_tratadas/sinistrosRecife.rds'),
+               b <- read.csv2('bases_tratadas/sinistrosRecife.csv', sep = ';'),
+               times = 10L)
