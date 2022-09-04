@@ -392,3 +392,12 @@ microbenchmark(a <- saveRDS(sinistrosRecifetotal, "bases_tratadas/sinistrosRecif
 microbenchmark(a <- readRDS('bases_tratadas/sinistrosRecife.rds'),
                b <- read.csv2('bases_tratadas/sinistrosRecife.csv', sep = ';'),
                times = 10L)
+
+## Tipos de dados no R ##
+
+## Estrutura de fatores
+country <- c(1, 2, 3, 4, 5, 1, 2, 3)
+recode <- c(Argentina = 1, Bolivia = 2, Brazil = 3, Chile = 4, Colombia = 5)
+
+(country <- factor(country, levels = recode, labels = names(recode)))
+
