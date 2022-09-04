@@ -12,7 +12,11 @@ library("readxl")
 library("rjson")
 library("XML")
 library("microbenchmark")
-
+library("forcats")
+library("ade4")
+library("arules")
+library("arules")
+library("ade4")
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -400,4 +404,27 @@ country <- c(1, 2, 3, 4, 5, 1, 2, 3)
 recode <- c(Argentina = 1, Bolivia = 2, Brazil = 3, Chile = 4, Colombia = 5)
 
 (country <- factor(country, levels = recode, labels = names(recode)))
+
+## Mais fatores!! ##
+
+for (i in 3:6) {
+  sinistrosRecifetotal[, i] <- as.factor(sinistrosRecifetotal[, i])
+}
+
+str(sinistrosRecifetotal)
+
+factorsSinistros <- unlist(lapply(sinistrosRecifetotal, is.factor))
+sinistrosFactors <- sinistrosRecifetotal[, factorsSinistros]
+str(sinistrosFactors)
+
+## One hot encoding
+sinistrosDummy <- acm.disjonctif(sinistrosFactors)
+
+## Discretizacao
+inteirosSinistros <- unlist(lapply(sinistrosRecifetotal, is.integer))
+sinistrosInteiros <- sinistrosRecifetotal[, inteirosSinistros]
+
+## Transformacao dos fatores de uma base em 3 tipos: mais frequentes, segundo mais frequente e outros
+sinistrosInteiros$auto <- discretize(sinistrosInteiros$auto, method = "interval",
+                                     breaks = 3, labels = c("modo1", "modo2", "modo3"))
 
