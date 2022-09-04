@@ -428,3 +428,17 @@ sinistrosInteiros$auto <- discretize(sinistrosInteiros$auto, method = "interval"
 ## Transformacao dos fatores de uma base em: mais frequentes, segundo mais frequente e outros
 fct_lump(sinistrosFactors$natureza_acidente, n = 3)
 
+## Estruturacao ##
+
+## Sumario
+count(sinistrosRecifetotal, situacao)
+
+## Agrupamento
+sinistrosRecifetotal %>% group_by(situacao) %>% summarise(avg = vitimas)
+
+## Manipulacao de casos
+arrange(sinistrosRecifetotal, vitimas)
+arrange(sinistrosRecifetotal, desc(vitimas))
+
+## Manipulacao de colunas
+sinistrosRecifetotal %>% rename(nvitimas = vitimas)
