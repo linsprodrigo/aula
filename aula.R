@@ -13,8 +13,6 @@ library("rjson")
 library("XML")
 library("microbenchmark")
 library("forcats")
-library("ade4")
-library("arules")
 library("arules")
 library("ade4")
 
@@ -424,7 +422,9 @@ sinistrosDummy <- acm.disjonctif(sinistrosFactors)
 inteirosSinistros <- unlist(lapply(sinistrosRecifetotal, is.integer))
 sinistrosInteiros <- sinistrosRecifetotal[, inteirosSinistros]
 
-## Transformacao dos fatores de uma base em 3 tipos: mais frequentes, segundo mais frequente e outros
 sinistrosInteiros$auto <- discretize(sinistrosInteiros$auto, method = "interval",
                                      breaks = 3, labels = c("modo1", "modo2", "modo3"))
+
+## Transformacao dos fatores de uma base em: mais frequentes, segundo mais frequente e outros
+fct_lump(sinistrosFactors$natureza_acidente, n = 3)
 
