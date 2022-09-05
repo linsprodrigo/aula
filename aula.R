@@ -17,6 +17,7 @@ library("arules")
 library("ade4")
 library('data.table')
 library("tidyverse")
+library("funModeling")
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -463,3 +464,16 @@ msouth <- msouth %>% filter(row <= min(result$row))
 
 msouthw <- msouth %>% pivot_wider(names_from = row, values_from = v2x_polyarchy) %>% 
   remove_rownames %>% column_to_rownames(var="country")
+
+## Limpeza ##
+
+## Remocao de NA presente nos dados
+
+new_south <- south_america %>% select(country, v2x_polyarchy, log_gdppc, coups)
+
+status(new_south)
+freq(new_south)
+plot_num(new_south)
+profiling_num(new_south)
+
+new_south <- new_south %>% filter(coups >= 0)
