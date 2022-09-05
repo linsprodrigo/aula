@@ -15,6 +15,8 @@ library("microbenchmark")
 library("forcats")
 library("arules")
 library("ade4")
+library('data.table')
+library("tidyverse")
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -428,7 +430,7 @@ sinistrosInteiros$auto <- discretize(sinistrosInteiros$auto, method = "interval"
 ## Transformacao dos fatores de uma base em: mais frequentes, segundo mais frequente e outros
 fct_lump(sinistrosFactors$natureza_acidente, n = 3)
 
-## Estruturacao ##
+## Dplyr ##
 
 ## Sumario
 count(sinistrosRecifetotal, situacao)
@@ -442,3 +444,22 @@ arrange(sinistrosRecifetotal, desc(vitimas))
 
 ## Manipulacao de colunas
 sinistrosRecifetotal %>% rename(nvitimas = vitimas)
+
+## Estruturacao ##
+
+## Pivo
+library('readr')
+mydata <- read_csv('dataframe.csv') ## banco criado por mim ##
+
+south_america_countries <- c("Argentina", "Brazil", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Paraguay",
+                   "Peru", "Uruguay", "Venezuela") ## paises sul americanos ##
+
+south_america <- mydata %>% filter(country %in% south_america_countries)
+
+msouth <- south_america %>% group_by(country) %>% mutate(row = row_number()) %>% select(country, v2x_polyarchy, row)
+
+result <- msouth %>% group_by(country) %>% filter(row == max(row))
+msouth <- msouth %>% filter(row <= min(result$row))
+
+msouthw <- msouth %>% pivot_wider(names_from = row, values_from = v2x_polyarchy) %>% 
+  remove_rownames %>% column_to_rownames(var="country")
