@@ -244,15 +244,23 @@ lapply(listaPaises[,3:4], hist)
 
 ## Funcoes
 
+## Exemplo do professor ##
 f <- function() {
   cat("Hello, world!\n")
 }
 f()
 
+## Funcao feita por mim
+f <- function() {
+  cat("Clube Náutico Capibaribe")
+}
+
+f()
+
 # função com estrutura de repetição
 f <- function(nro) {
   for(i in 1:nro) {
-    cat("Hello, world!\n")
+    cat("Clube Náutico Capibaribe")
   }
 }
 f(3)
@@ -477,3 +485,8 @@ plot_num(new_south)
 profiling_num(new_south)
 
 new_south <- new_south %>% filter(coups >= 0)
+
+## T4 - ANALISE EXPLORATORIA DE DADOS ####
+## 29 de agosto ##
+
+## Estatistica descritiva basica no R ##
