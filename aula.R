@@ -569,3 +569,18 @@ breast_cancer_test$observed
 breast_cancer_test$expected
 
 corrplot(breast_cancer_test$residuals, is.cor = FALSE)
+
+## Valores Ausentes ##
+
+## NA MCAR, MAR ou MANR
+## Shadow Matrix
+
+mydataNA <- as.data.frame(abs(is.na(mydata)))
+
+mydataNA <- mydataNA[which(sapply(mydataNA, sd) > 0)]
+
+round(cor(mydataNA), 3)
+
+mydataNA <- cbind(mydataNA, country = mydata$country)
+mydataNAcountry <- mydataNA %>% group_by(country) %>% summarise(across(everything(), list(sum)))
+mydataNAcountry
