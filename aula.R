@@ -486,6 +486,20 @@ profiling_num(new_south)
 
 new_south <- new_south %>% filter(coups >= 0)
 
+## Enriquecimento de dados
+
+## Exemplo professor
+baseCodMun <- read.table('bases_originais/base_codigos_mun.txt', sep = ',', header = T, encoding = 'UTF-8')
+
+campusIES <- read.csv2('bases_originais/ies_georref.csv')
+
+campusIES <- left_join(campusIES, baseCodMun, by = c('CO_MUNICIPIO' = 'id_munic_7'))
+
+## Merge feito por mim
+
+merge_pais <- left_join(south_america, mydata, by = c('country' = 'country', 'year' = 'year'))
+
+
 ## T4 - ANALISE EXPLORATORIA DE DADOS ####
 ## 29 de agosto ##
 
