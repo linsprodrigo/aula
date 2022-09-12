@@ -20,6 +20,7 @@ library("tidyverse")
 library("funModeling")
 library('fBasics')
 library('corrplot')
+library('data.table')
 
 ##
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
@@ -551,3 +552,20 @@ pairs(usarrests)
 usarrestsCOR <- cor(usarrests)
 corrplot(usarrestsCOR, method = "number", order = 'alphabet')
 corrplot(usarrestsCOR, order = 'alphabet')
+
+## Qui-quadrado - Variaveis Categoricas ##
+
+breast_cancer <- fread('https://raw.githubusercontent.com/hugoavmedeiros/cp_com_r/master/bases_tratadas/breast_cancer.csv', stringsAsFactors = T)
+
+breast_cancer_table <- table(breast_cancer$idade, breast_cancer$tumor_tamanho)
+breast_cancer_table
+
+ggplot(breast_cancer) + aes(x = tumor_tamanho, fill = idade) +
+  geom_bar(position = "fill")
+
+breast_cancer_test <- chisq.test(breast_cancer_table)
+breast_cancer_test
+breast_cancer_test$observed
+breast_cancer_test$expected
+
+corrplot(breast_cancer_test$residuals, is.cor = FALSE)
