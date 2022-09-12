@@ -19,7 +19,9 @@ library('data.table')
 library("tidyverse")
 library("funModeling")
 library('fBasics')
+library('corrplot')
 
+##
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
 ## Criando objeto simples ##
@@ -541,4 +543,11 @@ plot_num(usarrests)
 profiling_num(usarrests)
 ## freq() nao se aplica por nao haver fator no banco
 
-## 
+## Correlacao - Variaveis Numericas ##
+
+cor(usarrests)
+pairs(usarrests)
+
+usarrestsCOR <- cor(usarrests)
+corrplot(usarrestsCOR, method = "number", order = 'alphabet')
+corrplot(usarrestsCOR, order = 'alphabet')
