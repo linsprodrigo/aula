@@ -508,7 +508,7 @@ merge_pais <- left_join(south_america, mydata, by = c('country' = 'country', 'ye
 usarrests <- USArrests
 
 ## Nao fiz tabela de frequencia (absoluta ou relativa) porque a base sugerida (USArrests) ##
-## nao possui variavel categorica ##
+## nao possui fator ##
 
 ## Média da variável Murder da base USArrests
 mean(usarrests$Murder)
@@ -533,3 +533,13 @@ summary(usarrests)
 pacman::p_load(fBasics)
 basicStats(usarrests[ , c(1:4)])
 hist(usarrests$Murder) # histograma - gráfico que permite conhecer a curva dos dados
+
+## Descoberta ##
+
+glimpse(usarrests)
+status(usarrests)
+plot_num(usarrests)
+profiling_num(usarrests)
+## freq() nao se aplica por nao haver fator no banco
+
+## 
