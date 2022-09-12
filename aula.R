@@ -18,6 +18,7 @@ library("ade4")
 library('data.table')
 library("tidyverse")
 library("funModeling")
+library('fBasics')
 
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
 
@@ -501,6 +502,34 @@ merge_pais <- left_join(south_america, mydata, by = c('country' = 'country', 'ye
 
 
 ## T4 - ANALISE EXPLORATORIA DE DADOS ####
-## 29 de agosto ##
 
 ## Estatistica descritiva basica no R ##
+
+usarrests <- USArrests
+
+## Nao fiz tabela de frequencia (absoluta ou relativa) porque a base sugerida (USArrests) ##
+## nao possui variavel categorica ##
+
+## Média da variável Murder da base USArrests
+mean(usarrests$Murder)
+
+## Mediana da variável Murder da base USArrests
+median(usarrests$Murder)
+
+## Separatrizes da variável Murder da base USArrests
+quantile(usarrests$Murder, probs=0.75)
+quantile(usarrests$Murder, probs=0.10)
+quantile(usarrests$Murder, probs=0.95)
+boxplot(usarrests$Murder) # boxplot - gráfico que resume as sepatrizes
+
+## Desvio-padrão da variável Murder da base USArrests
+sd(usarrests$Murder)
+plot(usarrests$Murder)
+
+## Sumário descritivo básico das variáveis
+summary(usarrests)
+
+## Sumário descritivo completo das variáveis usando o pacote fBasics
+pacman::p_load(fBasics)
+basicStats(usarrests[ , c(1:4)])
+hist(usarrests$Murder) # histograma - gráfico que permite conhecer a curva dos dados
