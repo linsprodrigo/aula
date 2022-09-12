@@ -530,7 +530,6 @@ plot(usarrests$Murder)
 summary(usarrests)
 
 ## Sumário descritivo completo das variáveis usando o pacote fBasics
-pacman::p_load(fBasics)
 basicStats(usarrests[ , c(1:4)])
 hist(usarrests$Murder) # histograma - gráfico que permite conhecer a curva dos dados
 
