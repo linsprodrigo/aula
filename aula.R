@@ -21,6 +21,8 @@ library("funModeling")
 library('fBasics')
 library('corrplot')
 library('data.table')
+library('plotly')
+library('EnvStats')
 
 ##
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
@@ -584,3 +586,32 @@ round(cor(mydataNA), 3)
 mydataNA <- cbind(mydataNA, country = mydata$country)
 mydataNAcountry <- mydataNA %>% group_by(country) %>% summarise(across(everything(), list(sum)))
 mydataNAcountry
+
+## Outliers ##
+
+covid19PE <- fread('https://dados.seplag.pe.gov.br/apps/basegeral.csv')
+
+covid19PEMun <- covid19PE %>% count(municipio, sort = T, name = 'casos') %>% mutate(casos2 = sqrt(casos),
+                                                                                    casosLog = log10(casos))
+
+plot_ly(y = covid19PEMun$casos2, type = "box", test = covid19PEMun$municipio,
+        boxpoints = "all", jitter = 0.3)
+
+boxplot.stats(covid19PEMun$casos2) $out
+boxplot.stats(covid19PEMun$casos2, coef = 2) $out
+
+covid19PEout <- boxplot.stats(covid19PEMun$casos2) $out
+covid19PEout
+
+covid19PEoutIndex <- which(covid19PEMun$casos2 %in% c(covid19PEout))
+covid19PEoutIndex
+
+## filtro de Hamper
+lower_bound <- median(covid19PEMun$casos2) - 3 * mad(covid19PEMun$casos2, constant = 1)
+upper_bound <- median(covid19PEMun$casos2) + 3 * mad(covid19PEMun$casos2, constant = 1)
+(outlier_ind <- which(covid19PEMun$casos2 < lower_bound | covid19PEMun$casos2 > upper_bound))
+
+## teste de Rosner
+covid19Rosner <- rosnerTest(covid19PEMun$casos2, k = 10)
+covid19Rosner
+covid19Rosner$all.stats
