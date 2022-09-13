@@ -23,6 +23,8 @@ library('corrplot')
 library('data.table')
 library('plotly')
 library('EnvStats')
+library('Hmisc')
+library('VIM')
 
 ##
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
@@ -615,3 +617,16 @@ upper_bound <- median(covid19PEMun$casos2) + 3 * mad(covid19PEMun$casos2, consta
 covid19Rosner <- rosnerTest(covid19PEMun$casos2, k = 10)
 covid19Rosner
 covid19Rosner$all.stats
+
+## Imputacao ##
+
+mydataImput <- mydata[ , c(2, 5, 42:47)]
+
+## Hot deck
+mydataImput2 <- kNN(mydataImput)
+
+## Imputacao numerica
+mydataImput$legparty <- impute(mydataImput$legparty, fun = mean)
+
+is.imputed(mydataImput$legparty)
+table(is.imputed(mydataImput$legparty))
