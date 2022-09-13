@@ -25,6 +25,7 @@ library('plotly')
 library('EnvStats')
 library('Hmisc')
 library('VIM')
+library('validate')
 
 ##
 ## T1 - INTRODUCAO AO R/RSTUDIO ####
@@ -630,3 +631,10 @@ mydataImput$legparty <- impute(mydataImput$legparty, fun = mean)
 
 is.imputed(mydataImput$legparty)
 table(is.imputed(mydataImput$legparty))
+
+## Validacao ##
+
+regras_pibpc <- validator(cgdppc >= 0, democracy >= 0)
+validacao_pibpc <- confront(mydata, regras_pibpc)
+summary(validacao_pibpc)
+plot(validacao_pibpc)
